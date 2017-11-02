@@ -1,6 +1,6 @@
 ### What the fook is this?
 
-This script downloads a wallpaper of your screen resolution from [Unsplash](www.unpslash.com) and sets it as your wallpaper. It'll save the downloaded image in pictures folder. You can also select if you wanna play a random song from your music folder in the default music player. The script waits for the internet till eternity if your net's like mine (not working). Oh yes, theres a notification too.  
+This script downloads a wallpaper of your screen resolution from [Unsplash](https://unsplash.com/) and sets it as your wallpaper. It'll save the downloaded image in pictures folder. You can also select if you wanna play a random song from your music folder in the default music player. The script waits for the internet till eternity if your net's like mine (not working). Oh yes, theres a notification too.  
 #### Few things to remember:
 * Only for **linux**
 * Needs python2 and tkinter
@@ -10,3 +10,4 @@ This script downloads a wallpaper of your screen resolution from [Unsplash](www.
 * Stop hate crime againt asian midget grannies. I'm strictly against it.  
 
 #### Working ok
+![screenshot](https://github.com/RitwickVerma/lamewallpaperchangingpythonscriptforlazypeeps/blob/master/workingok.png "You won't know if this is real or I just downloaded a wallpaper and set it myself.")
