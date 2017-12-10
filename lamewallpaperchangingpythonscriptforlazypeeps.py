@@ -3,7 +3,11 @@ import urllib
 import os
 import subprocess as sp
 import Tkinter as tk
-import random, platform, ctypes, sys
+import random, platform, sys
+try:
+    import ctypes
+except:
+    pass
 
 def connected():
     while True:
@@ -24,43 +28,40 @@ def createdialog():
         category="?"+categoryoptionsvar.get()
         featured=featuredcheckbuttonvar.get()
         url="https://source.unsplash.com/"+("featured/" if(featured) else "")+str(screen_width)+"x"+str(screen_height)+"/"+ ("" if(category=="?Random") else category)
-        print(dirurl)
+        print(url)
         urllib.urlretrieve(url,"background.jpg")
-        if(platform.system().lower().find('windows')==-1):
+        if(os=='linux'):
             os.system("/usr/bin/gsettings set org.gnome.desktop.background picture-uri "+dirurl)
             sp.call(['notify-send','-t','5000','You are awesome','Wallpaper changed from unsplashed'])
-
         else:
-            ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, dirurl+"\\background.jpg" , 0)
+            ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, dirurl+"\\background.jpg" , 3)
 
 
     categorytext=tk.Label(root,text="Categories")
-    categorytext.pack()
-    categorytext.place(x=10,y=10)
+    categorytext.grid(row=1,column=1)
 
     categoryoptions=["Random","Nature","Waterfalls","City","Mountains","Sky","Space","Beach","Ocean"]
     categoryoptionsvar = tk.StringVar(root)
     categoryoptionsvar.set("Random")
     categoryoptionsmenu = apply(tk.OptionMenu,(root,categoryoptionsvar) + tuple(categoryoptions))
-    categoryoptionsmenu.pack()
-    categoryoptionsmenu.place(x=80,y=5)
+    categoryoptionsmenu.grid(row=1,column=2)
 
     featuredcheckbuttonvar=tk.IntVar()
     featuredcheckbutton=tk.Checkbutton(root,text="Featured",variable=featuredcheckbuttonvar)
-    featuredcheckbutton.pack()
-    featuredcheckbutton.place(x=10,y=50)
+    featuredcheckbutton.grid(row=2,column=1)
 
     gobutton=tk.Button(root,text="Go!",command=changewall)
-    gobutton.pack()
-    gobutton.place(x=75,y=150)
+    gobutton.grid(row=4,column=1,columnspan=2)
 
 
 def main():
     root.title("AutoWall")
     createdialog()
     root.mainloop()
-    #changewall(screen_width,screen_height)
 
+os='linux' if platform.system().lower().find('windows')==-1 else 'windows'
+if os=='windows':
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 connected()
 main()
