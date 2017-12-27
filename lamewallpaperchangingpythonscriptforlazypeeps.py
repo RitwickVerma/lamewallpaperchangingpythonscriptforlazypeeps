@@ -12,7 +12,7 @@ except:
 def connected():
     while True:
         try:
-            urllib2.urlopen("https://www.google.co.in/",timeout=1)
+            urllib2.urlopen("https://www.google.co.in/", timeout=1)
             return
         except urllib2.URLError as err:
             pass
@@ -23,16 +23,17 @@ def createdialog():
         root.quit()
         SPI_SETDESKWALLPAPER = 20
         dirurl=sys.path[0]
-        screen_width = root.winfo_screenwidth()
+        screen_width = root.winfo_screenwidth() 
         screen_height = root.winfo_screenheight()
         category="?"+categoryoptionsvar.get()
         featured=featuredcheckbuttonvar.get()
         url="https://source.unsplash.com/"+("featured/" if(featured) else "")+str(screen_width)+"x"+str(screen_height)+"/"+ ("" if(category=="?Random") else category)
         print(url)
         urllib.urlretrieve(url,"background.jpg")
-        if(os=='linux'):
-            os.system("/usr/bin/gsettings set org.gnome.desktop.background picture-uri "+dirurl)
-            sp.call(['notify-send','-t','5000','You are awesome','Wallpaper changed from unsplashed'])
+        if(osname=='linux'):
+            cmd="/usr/bin/gsettings set org.gnome.desktop.background picture-uri "+dirurl+"/background.jpg"
+            os.system(cmd)
+            sp.call(['notify-send','-t','5000','I\'ll code and make cash' ,'wallpaper changed from unsplash'])
         else:
             ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, dirurl+"\\background.jpg" , 3)
 
@@ -59,8 +60,8 @@ def main():
     createdialog()
     root.mainloop()
 
-os='linux' if platform.system().lower().find('windows')==-1 else 'windows'
-if os=='windows':
+osname='linux' if platform.system().lower().find('windows')==-1 else 'windows'
+if osname=='windows':
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 connected()
